@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -59,9 +59,26 @@ namespace LaboratoryActivity5
             // e. Regular Deductions
             PagIbigContribution_Txtbox.Text = "200.00"; // Fixed amount
 
-            // Logic for mandated amounts (Example: 5% SSS, 2% PhilHealth, 10% Tax)
+            // Logic for mandated amounts
             SSSContribution_Txtbox.Text = (grossIncome * 0.05).ToString("N2");
-            PhilhealthContribution_Txtbox.Text = (grossIncome * 0.02).ToString("N2");
+
+            // --- PhilHealth Specific Logic ---
+            double philhealthAmount;
+            if (grossIncome < 10000)
+            {
+                philhealthAmount = 500;
+            }
+            else if (grossIncome > 100000)
+            {
+                philhealthAmount = 5000;
+            }
+            else
+            {
+                philhealthAmount = grossIncome * 0.05;
+            }
+            PhilhealthContribution_Txtbox.Text = philhealthAmount.ToString("N2");
+            // ---------------------------------
+
             IncomeTaxContribution_Txtbox.Text = (grossIncome * 0.10).ToString("N2");
         }
 
@@ -147,3 +164,6 @@ namespace LaboratoryActivity5
     }
     
 }
+
+    
+
